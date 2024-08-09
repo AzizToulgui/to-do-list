@@ -1,57 +1,60 @@
 document.addEventListener("DOMContentLoaded", function () {
-  //bech mano93odech nekteb fi hedhka el kol donc hata a const (hasitha ashel)
-  const inputField = document.getElementById("inp");
-  const taskList = document.getElementById("box");
+    const inputField = document.getElementById("inp");
+    const taskList = document.getElementById("box");
 
-  function addTask() {
-    var inpVal = document.getElementById("inp").value;
+    function addTask() {
+        var inpVal = inputField.value;
 
-    if (inpVal.trim() === "") {
-      inpVal = prompt("Please enter a task:");
+        if (inpVal.trim() === "") {
+            inpVal = prompt("Please enter a task:");
 
-      if (inpVal !== null && inpVal.trim() !== "") {
-        taskList.innerHTML += `<li>
+            if (inpVal !== null && inpVal.trim() !== "") {
+                taskList.innerHTML += `<li>
                     <input type="checkbox"> ${inpVal}
                     <button class="edit-btn">Edit</button>
-                    <button class="delete-btn">Delete</button>
                 </li>`;
-      }
-    } else {
-      taskList.innerHTML += `<li>
+            }
+        } else {
+            taskList.innerHTML += `<li>
                 <input type="checkbox"> ${inpVal}
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
+                <button class="edit-btn">Edit</button>
             </li>`;
+        }
+
+        inputField.value = ""; // Clear the input field
     }
 
-    inputField.value = "";
-  }
+    document.getElementById("b1").addEventListener("click", addTask);
 
-  document.getElementById("b1").addEventListener("click", addTask);
+    // Add Enter key functionality
+    inputField.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            addTask();
+        }
+    });
 
-  // ki nenzel ala entre yzidha fel lista
-  inputField.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      addTask();
-    }
-  });
+    // Event delegation for edit buttons and checkboxes
+    taskList.addEventListener("click", function (event) {
+        if (event.target.classList.contains("edit-btn")) {
+            // Edit the task text
+            const listItem = event.target.parentElement;
+            const textNode = listItem.childNodes[1]; // This should be the text node
 
-  // Event delegation for delete and edit buttons
-  taskList.addEventListener("click", function (event) {
-    if (event.target.classList.contains("delete")) {
-      // Remove the parent <li> element
-      event.target.parentElement.remove();
-    } else if (event.target.classList.contains("edit")) {
-         // hedhy ritha men chatgpt manich fehemha blgde khater mzeelt ma9ritech jquery
-         const listItem = event.target.parentElement;
-         const textElement = listItem.querySelector("input[type='checkbox']").nextSibling;
+            const currentText = textNode.textContent.trim();
+            const newText = prompt("Edit the task:", currentText);
 
-         const currentText = textElement.textContent.trim();
-         const newText = prompt("Edit the task:", currentText);
-
-         if (newText !== null && newText.trim() !== "") {
-             textElement.textContent = ` ${newText}`;
-      }
-    }
-  });
+            if (newText !== null && newText.trim() !== "") {
+                textNode.textContent = ` ${newText}`;
+            }
+        } else if (event.target.type === "checkbox") {
+            // If the checkbox is checked, wait 3 seconds before removing the task
+            const checkbox = event.target;
+            if (checkbox.checked) {
+                alert("congrats on compliting the task it will be deleted")
+                setTimeout(function () {
+                    checkbox.parentElement.remove();
+                }, 3000);
+            }
+        }
+    });
 });

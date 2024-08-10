@@ -1,60 +1,61 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const inputField = document.getElementById("inp");
-    const taskList = document.getElementById("box");
+  const inputField = document.getElementById("inp");
+  const taskList = document.getElementById("box");
 
-    function addTask() {
-        var inpVal = inputField.value;
+  function addTask() {
+    const inpVal = inputField.value.trim();
 
-        if (inpVal.trim() === "") {
-            inpVal = prompt("Please enter a task:");
-
-            if (inpVal !== null && inpVal.trim() !== "") {
-                taskList.innerHTML += `<li>
-                    <input type="checkbox"> ${inpVal}
+    if (inpVal === "") {
+      const prom = prompt("Please enter a task:");
+      if (prom !== null && prom.trim() !== "") {
+        taskList.innerHTML += `<li>
+                    <input type="checkbox"> ${prom}
                     <button class="edit-btn">Edit</button>
                 </li>`;
-            }
-        } else {
-            taskList.innerHTML += `<li>
+      }
+    } else {
+      taskList.innerHTML += `<li>
                 <input type="checkbox"> ${inpVal}
                 <button class="edit-btn">Edit</button>
             </li>`;
-        }
-
-        inputField.value = ""; // Clear the input field
     }
 
-    document.getElementById("b1").addEventListener("click", addTask);
+    document.getElementById("inp").value = "";
+  }
 
-    // Add Enter key functionality
-    inputField.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            addTask();
-        }
-    });
+  document.getElementById("b1").addEventListener("click", addTask);
 
-    // Event delegation for edit buttons and checkboxes
-    taskList.addEventListener("click", function (event) {
-        if (event.target.classList.contains("edit-btn")) {
-            // Edit the task text
-            const listItem = event.target.parentElement;
-            const textNode = listItem.childNodes[1]; // This should be the text node
+  // fazet el entre kifeh tekhdem
+  inputField.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      addTask();
+    }
+  });
 
-            const currentText = textNode.textContent.trim();
-            const newText = prompt("Edit the task:", currentText);
+  
+  taskList.addEventListener("click", function (event) {
+    if (event.target.classList.contains("edit-btn")) {
+      
+      const listItem = event.target.parentElement;
+      const textNode = listItem.querySelector(
+        "input[type='checkbox']"
+      ).nextSibling;
 
-            if (newText !== null && newText.trim() !== "") {
-                textNode.textContent = ` ${newText}`;
-            }
-        } else if (event.target.type === "checkbox") {
-            // If the checkbox is checked, wait 3 seconds before removing the task
-            const checkbox = event.target;
-            if (checkbox.checked) {
-                alert("congrats on compliting the task it will be deleted")
-                setTimeout(function () {
-                    checkbox.parentElement.remove();
-                }, 3000);
-            }
-        }
-    });
+      const currentText = textNode.textContent.trim();
+      const newText = prompt("Edit the task:", currentText);
+
+      if (newText !== null && newText.trim() !== "") {
+        textNode.textContent = ` ${newText}`;
+      }
+    } else if (event.target.type === "checkbox") {
+      // ken chked 3sc w ttfaskh
+      const checkbox = event.target;
+      if (checkbox.checked) {
+        alert("Congrats on completing the task! It will be deleted shortly.");
+        setTimeout(function () {
+          checkbox.parentElement.remove();
+        }, 3000); // tedhem bel milliseconds
+      }
+    }
+  });
 });

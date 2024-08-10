@@ -1,9 +1,126 @@
+
+
+ul#box li {
+  padding: 8px; 
+  background-color: #444; 
+  color: white;
+  border-radius: 4px;
+  margin-bottom: 5px; 
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  border: 1px solid #333; 
+  margin-right: 900px;
+}
+
+
+ul#box li .edit-btn {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+ul#box li .edit-btn:hover {
+  background-color: #666;
+}
+
+
 .c1 {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  padding: 100px;
+  margin-top: 30px;
+  margin-left: 150px;
+  margin-right: 150px;
+  background-color: white;
+  display: block;
 }
-h1{
+
+.c2 {
+  padding-top: 50px;
+  padding-left: 50px;
+}
+.c3{
+  margin-left: 100px;
+  padding-bottom: 5%;
+}
+
+img {
+  height: 300px;
+  width: 300px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  margin-left: 800px;
+
+}
+
+h1 {
   text-align: center;
+  color: white;
+  font-size: 50px;
+}
+
+p {
+  text-align: center;
+}
+
+#inp {
+  padding: 6px 12px;
+  background: rgb(31, 32, 35);
+  border: 1px solid rgb(60, 63, 68);
+  border-radius: 4px;
+  font-size: 13px;
+  color: rgb(247, 248, 248);
+  height: 46px;
+  appearance: none;
+  transition: border 0.15s ease 0s;
+}
+
+#inp:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: rgb(100, 153, 255);
+}
+
+.price-tag {
+  display: inline-block;
+  width: auto;
+  height: 38px;
+  background-color: #333;
+  border-radius: 3px 4px 4px 3px;
+  border-left: 1px solid #333;
+  margin-left: 19px;
+  position: relative;
+  color: white;
+  line-height: 38px;
+  padding: 0 10px;
+}
+
+.price-tag:before {
+  content: "";
+  position: absolute;
+  display: block;
+  left: -19px;
+  width: 0;
+  height: 0;
+  border-top: 19px solid transparent;
+  border-bottom: 19px solid transparent;
+  border-right: 19px solid #333;
+}
+
+.price-tag:after {
+  content: "";
+  background-color: white;
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  display: block;
+  position: absolute;
+  left: -9px;
+  top: 17px;
+}
+
+body {
+  background-color: #333;
 }

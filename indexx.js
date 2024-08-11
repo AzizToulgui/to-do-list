@@ -1,61 +1,51 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const inputField = document.getElementById("inp");
-  const taskList = document.getElementById("box");
+let inp = document.getElementById("inp");
+let btn = document.getElementById("btn");
+let ul = document.getElementById("ul");
 
-  function addTask() {
-    const inpVal = inputField.value.trim();
-
-    if (inpVal === "") {
-      const prom = prompt("Please enter a task:");
-      if (prom !== null && prom.trim() !== "") {
-        taskList.innerHTML += `<li>
-                    <input type="checkbox"> ${prom}
-                    <button class="edit-btn">Edit</button>
-                </li>`;
-      }
-    } else {
-      taskList.innerHTML += `<li>
-                <input type="checkbox"> ${inpVal}
-                <button class="edit-btn">Edit</button>
-            </li>`;
-    }
-
-    document.getElementById("inp").value = "";
+function addTask() {
+  let taskText = inp.value.trim();
+  // Check if the input field is empty
+  if (taskText === "") {
+    taskText = prompt("Give a task");
   }
-
-  document.getElementById("b1").addEventListener("click", addTask);
-
-  // fazet el entre kifeh tekhdem
-  inputField.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      addTask();
-    }
-  });
-
-  
-  taskList.addEventListener("click", function (event) {
-    if (event.target.classList.contains("edit-btn")) {
-      
-      const listItem = event.target.parentElement;
-      const textNode = listItem.querySelector(
-        "input[type='checkbox']"
-      ).nextSibling;
-
-      const currentText = textNode.textContent.trim();
-      const newText = prompt("Edit the task:", currentText);
-
-      if (newText !== null && newText.trim() !== "") {
-        textNode.textContent = ` ${newText}`;
+  if (taskText !== null && taskText !== "") {
+    // Create a new li element for the task
+    let li = document.createElement("li");
+    li.textContent = taskText;
+    // Create the delete button
+    let dltbtn = document.createElement("button");
+    dltbtn.textContent = "Delete";
+    // Add event listener to delete the task
+    dltbtn.addEventListener("click", () => {
+      ul.removeChild(li);
+    });
+    // Create the edit button
+    let editbtn = document.createElement("button");
+    editbtn.textContent = "Edit";
+    // Add event listener to edit the task
+    editbtn.addEventListener("click", () => {
+      let editText = prompt("Edit your task", taskText);
+      if (editText !== null && editText.trim() !== "") {
+        li.textContent = editText.trim();
+        li.appendChild(editbtn);
+        li.appendChild(dltbtn);
       }
-    } else if (event.target.type === "checkbox") {
-      // ken chked 3sc w ttfaskh
-      const checkbox = event.target;
-      if (checkbox.checked) {
-        alert("Congrats on completing the task! It will be deleted shortly.");
-        setTimeout(function () {
-          checkbox.parentElement.remove();
-        }, 3000); // tedhem bel milliseconds
-      }
-    }
-  });
+    });
+    // Append the buttons to the li
+    li.appendChild(editbtn);
+    li.appendChild(dltbtn);
+    // Append the li to the ul
+    ul.appendChild(li);
+    // Clear the input field
+    inp.value = "";
+  }
+}
+// Bind the addTask function to the button click
+btn.addEventListener("click", addTask);
+
+// Bind the addTask function to the Enter key press
+inp.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    addTask();
+  }
 });

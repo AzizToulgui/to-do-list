@@ -1,20 +1,17 @@
-
-
-ul#box li {
-  padding: 8px; 
-  background-color: #444; 
+ul#ul  li {
+  padding: 8px;
+  background-color: #444;
   color: white;
   border-radius: 4px;
-  margin-bottom: 5px; 
+  margin-bottom: 5px;
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  border: 1px solid #333; 
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #333;
   margin-right: 900px;
 }
 
-
-ul#box li .edit-btn {
+ul#ul li .edit-btn {
   background-color: #555;
   color: white;
   border: none;
@@ -22,10 +19,9 @@ ul#box li .edit-btn {
   border-radius: 4px;
 }
 
-ul#box li .edit-btn:hover {
+ul#ul li .edit-btn:hover {
   background-color: #666;
 }
-
 
 .c1 {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -42,17 +38,17 @@ ul#box li .edit-btn:hover {
   padding-top: 50px;
   padding-left: 50px;
 }
-.c3{
+.c3 {
   margin-left: 100px;
   padding-bottom: 5%;
 }
+
 
 img {
   height: 300px;
   width: 300px;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   margin-left: 800px;
-
 }
 
 h1 {
